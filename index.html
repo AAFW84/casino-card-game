@@ -1,34 +1,34 @@
 <!DOCTYPE html>
-  <html lang="es">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Casino — Aprende y Practica el Juego de Cartas</title>
-  <style>
-    :root{
-      --felt:#0b5e3c;
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casino — Aprende y Practica el Juego de Cartas</title>
+<style>
+  :root{
+    --felt:#0b5e3c;
     --felt-dark:#084a30;
     --gold:#e9c46a;
-          --card-bg:#fdfdfb;
-          --card-border:#2b2b2b;
+    --card-bg:#fdfdfb;
+    --card-border:#2b2b2b;
     --red:#c1272d;
-          --black:#1a1a1a;
+    --black:#1a1a1a;
     --panel:#0e3d28;
     --text:#f4f4f2;
-          --accent:#e76f51;
-          --accent2:#2a9d8f;
-}
+    --accent:#e76f51;
+    --accent2:#2a9d8f;
+  }
   *{box-sizing:border-box;}
   body{
-        margin:0;
+    margin:0;
     font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     background:radial-gradient(ellipse at center, var(--felt) 0%, var(--felt-dark) 100%);
     color:var(--text);
     min-height:100vh;
-}
+  }
   h1,h2,h3{margin:0 0 8px 0;}
   button{
-        font-family:inherit;
+    font-family:inherit;
     cursor:pointer;
     border:none;
     border-radius:8px;
@@ -36,13 +36,13 @@
     font-size:15px;
     font-weight:600;
     transition:transform .08s ease, box-shadow .08s ease;
-}
+  }
   button:active{transform:scale(0.96);}
   button:disabled{opacity:.45; cursor:not-allowed;}
   .btn-primary{background:var(--accent); color:#fff;}
-    .btn-primary:hover:not(:disabled){box-shadow:0 0 0 3px rgba(231,111,81,.35);}
+  .btn-primary:hover:not(:disabled){box-shadow:0 0 0 3px rgba(231,111,81,.35);}
   .btn-secondary{background:var(--accent2); color:#fff;}
-    .btn-secondary:hover:not(:disabled){box-shadow:0 0 0 3px rgba(42,157,143,.35);}
+  .btn-secondary:hover:not(:disabled){box-shadow:0 0 0 3px rgba(42,157,143,.35);}
   .btn-ghost{background:rgba(255,255,255,.12); color:var(--text);}
   .btn-ghost:hover:not(:disabled){background:rgba(255,255,255,.22);}
   .btn-gold{background:var(--gold); color:#3a2c00;}
@@ -56,13 +56,13 @@
   #startScreen p.tagline{opacity:.85; max-width:560px; margin:0 auto 30px;}
   .start-options{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:30px;}
   .start-card{
-        background:rgba(255,255,255,.06);
+    background:rgba(255,255,255,.06);
     border:1px solid rgba(255,255,255,.15);
     border-radius:14px;
     padding:22px;
     width:250px;
     text-align:left;
-}
+  }
   .start-card h3{color:var(--gold);}
   .start-card p{font-size:14px; opacity:.85; min-height:60px;}
   .start-card button{width:100%; margin-top:8px;}
@@ -84,16 +84,16 @@
   #aiZone{margin-bottom:10px;}
   #aiHand{display:flex; gap:-10px; min-height:70px; align-items:center; flex-wrap:wrap;}
   .card-back{
-        width:44px; height:62px; border-radius:6px;
+    width:44px; height:62px; border-radius:6px;
     background:repeating-linear-gradient(45deg, #3a5a86, #3a5a86 6px, #2c4568 6px, #2c4568 12px);
     border:2px solid #1a2d47;
     margin-left:-16px;
     box-shadow:1px 1px 3px rgba(0,0,0,.4);
-}
+  }
   .card-back:first-child{margin-left:0;}
 
-      #tableZone{
-        background:rgba(0,0,0,.18);
+  #tableZone{
+    background:rgba(0,0,0,.18);
     border:2px dashed rgba(255,255,255,.18);
     border-radius:16px;
     min-height:170px;
@@ -104,15 +104,15 @@
     align-items:flex-start;
     margin:12px 0;
     position:relative;
-}
+  }
   #tableZone.empty-hint::before{
     content:"La mesa está vacía";
     position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
     opacity:.4; font-size:14px;
-}
+  }
 
   .card{
-        width:56px; height:80px;
+    width:56px; height:80px;
     background:var(--card-bg);
     border:1px solid var(--card-border);
     border-radius:8px;
@@ -132,19 +132,33 @@
   .card.selectable:hover{transform:translateY(-4px); box-shadow:2px 5px 10px rgba(0,0,0,.5);}
   .card.selected{outline:3px solid var(--gold); transform:translateY(-6px);}
   .card.highlight{outline:3px solid var(--accent2); }
+  .card.chosen{outline:3px solid #61dafb; transform:translateY(-4px);}
+  .value-badge{position:absolute; top:2px; right:3px; font-size:8px; background:var(--gold); color:#3a2c00; padding:0 3px; border-radius:5px; font-weight:800; line-height:1.4;}
+
+  .mode-toggle{display:flex; gap:8px; justify-content:center; margin:10px 0 6px;}
+  .mode-btn{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.3); color:var(--text); padding:6px 16px; border-radius:20px; cursor:pointer; font-weight:700; font-size:13px;}
+  .mode-btn.active{background:var(--gold); color:#3a2c00; border-color:var(--gold);}
+  .mode-desc{font-size:11.5px; opacity:.75; margin:0 0 12px; min-height:28px;}
+
+  #manualPanel{background:rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:10px 12px; margin:10px 0;}
+  #manualPanel.hidden{display:none;}
+  .manual-title{font-size:12.5px; opacity:.85; font-weight:700; margin-bottom:6px;}
+  .manual-chosen{display:flex; gap:6px; flex-wrap:wrap; min-height:18px; margin-bottom:8px; font-size:12px; opacity:.85;}
+  .manual-hint{font-size:12px; opacity:.65; margin-top:4px;}
+  .build-pile.chosen{outline:3px solid #61dafb;}
 
   .build-pile{
-        background:rgba(233,196,106,.12);
+    background:rgba(233,196,106,.12);
     border:2px solid var(--gold);
     border-radius:10px;
     padding:8px;
     display:flex; flex-direction:column; gap:6px; align-items:center;
     min-width:70px;
-}
+  }
   .build-pile .build-value{
-        background:var(--gold); color:#3a2c00; font-weight:800; font-size:13px;
+    background:var(--gold); color:#3a2c00; font-weight:800; font-size:13px;
     padding:2px 8px; border-radius:12px;
-}
+  }
   .build-pile .build-groups{display:flex; gap:6px; flex-wrap:wrap; justify-content:center;}
   .build-pile .build-group{display:flex; margin-left:0;}
   .build-pile .build-group .card{margin-left:-22px;}
@@ -160,12 +174,14 @@
     padding:12px;
     margin-top:10px;
     display:none;
-}
+  }
   #actionPanel.active{display:block;}
-  #actionPanel h4{margin:0 0 8px 0; font-size:14px; color:var(--gold);}
+  #actionPanel h4{margin:0; font-size:14px; color:var(--gold);}
+  .action-panel-head{display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px;}
+  .action-panel-head #btnCancelSelection{white-space:nowrap;}
   .action-list{display:flex; flex-direction:column; gap:6px; max-height:220px; overflow-y:auto;}
   .action-btn{
-        text-align:left;
+    text-align:left;
     background:rgba(255,255,255,.08);
     color:var(--text);
     padding:9px 12px;
@@ -173,7 +189,7 @@
     font-size:13.5px;
     font-weight:500;
     border:1px solid rgba(255,255,255,.1);
-}
+  }
   .action-btn:hover{background:rgba(255,255,255,.18);}
   .action-btn.suggested{border:1px solid var(--gold); background:rgba(233,196,106,.18);}
   .action-btn.suggested::after{content:" 💡 sugerido"; opacity:.8; font-size:11px;}
@@ -186,28 +202,28 @@
     max-height:130px;
     overflow-y:auto;
     font-size:13px;
-}
+  }
   #logPanel .entry{padding:3px 0; border-bottom:1px solid rgba(255,255,255,.06);}
   #logPanel .entry:last-child{border-bottom:none;}
 
   .turn-banner{
-        text-align:center; font-size:14px; padding:8px; border-radius:8px;
+    text-align:center; font-size:14px; padding:8px; border-radius:8px;
     background:rgba(255,255,255,.08); margin-bottom:8px; font-weight:600;
-}
+  }
   .turn-banner.human{color:var(--accent2);}
   .turn-banner.ai{color:var(--accent);}
 
   /* ---------- MODAL ---------- */
   .modal-overlay{
-        position:fixed; inset:0; background:rgba(0,0,0,.65);
+    position:fixed; inset:0; background:rgba(0,0,0,.65);
     display:none; align-items:center; justify-content:center; z-index:50; padding:20px;
-}
+  }
   .modal-overlay.active{display:flex;}
   .modal-box{
-        background:var(--panel); border-radius:16px; padding:26px;
+    background:var(--panel); border-radius:16px; padding:26px;
     max-width:640px; width:100%; max-height:85vh; overflow-y:auto;
     box-shadow:0 10px 40px rgba(0,0,0,.5);
-}
+  }
   .modal-box h2{color:var(--gold);}
   .modal-box h4{color:var(--gold); margin-top:18px;}
   .modal-box table{width:100%; border-collapse:collapse; margin-top:10px; font-size:13.5px;}
@@ -226,7 +242,7 @@
     margin-bottom:12px;
     font-size:15px;
     line-height:1.5;
-}
+  }
   #tutorialBubble b{color:var(--gold);}
   .tutorial-progress{font-size:12px; opacity:.7; margin-bottom:6px;}
 
@@ -234,7 +250,7 @@
   #overlayCard{
     background:var(--panel); border-radius:16px; padding:28px; max-width:520px; width:100%;
     text-align:center;
-}
+  }
   #overlayCard h2{color:var(--gold);}
   #overlayCard table{width:100%; margin:14px 0; border-collapse:collapse;}
   #overlayCard td{padding:4px 8px; font-size:14px; border-bottom:1px solid rgba(255,255,255,.1);}
@@ -245,110 +261,124 @@
   @media(max-width:600px){
     .card{width:46px; height:66px;}
     .card .suit-mid{font-size:18px;}
-}
+  }
 </style>
-  </head>
-  <body>
-  <div id="app">
+</head>
+<body>
+<div id="app">
 
-    <!-- START SCREEN -->
-    <div id="startScreen">
-      <div class="logo">🃏</div>
-      <h1>Casino</h1>
-      <p class="tagline">El clásico juego de cartas de captura. Aprende las reglas paso a paso y luego practica con partidas aleatorias contra la IA hasta dominarlo.</p>
-      <div class="start-options">
-        <div class="start-card">
-          <h3>🎓 Tutorial guiado</h3>
-          <p>Aprende jugando: capturas simples, sumas, construcciones y barridas, explicado paso a paso con ejemplos reales.</p>
-          <button class="btn-secondary" id="btnStartTutorial">Empezar tutorial</button>
-        </div>
-        <div class="start-card">
-          <h3>🎮 Modo práctica</h3>
-        <p>Partidas aleatorias contra la IA. Cada partida reparte cartas distintas para que practiques en situaciones nuevas hasta llegar a 21 puntos.</p>
-          <button class="btn-primary" id="btnStartPractice">Jugar ahora</button>
-        </div>
-        <div class="start-card">
-          <h3>📖 Reglas completas</h3>
-          <p>Consulta el reglamento completo del juego Casino en cualquier momento, con la tabla de puntuación oficial.</p>
-        <button class="btn-ghost" id="btnShowRulesStart">Ver reglas</button>
-        </div>
+  <!-- START SCREEN -->
+  <div id="startScreen">
+    <div class="logo">🃏</div>
+    <h1>Casino</h1>
+    <p class="tagline">El clásico juego de cartas de captura. Aprende las reglas paso a paso y luego practica con partidas aleatorias contra la IA hasta dominarlo.</p>
+    <div class="start-options">
+      <div class="start-card">
+        <h3>🎓 Tutorial guiado</h3>
+        <p>Aprende jugando: capturas simples, sumas, construcciones y barridas, explicado paso a paso con ejemplos reales.</p>
+        <button class="btn-secondary" id="btnStartTutorial">Empezar tutorial</button>
       </div>
-    </div>
-
-    <!-- TUTORIAL SCREEN -->
-    <div id="tutorialScreen">
-      <div id="topbarTutorial" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-        <h2>🎓 Tutorial</h2>
-        <button class="btn-ghost" id="btnExitTutorial">Salir al menú</button>
-    </div>
-    <div class="tutorial-progress" id="tutorialProgress"></div>
-    <div id="tutorialBubble"></div>
-      <div class="zone-label">Mesa</div>
-      <div id="tutTableZone" class="table-zone-clone"></div>
-      <div class="zone-label" style="margin-top:14px;">Tu mano</div>
-      <div id="tutHandRow" style="display:flex; gap:6px; min-height:96px; align-items:flex-end; flex-wrap:wrap;"></div>
-      <div id="tutActionPanel" style="margin-top:10px;"></div>
-      <div style="margin-top:16px; text-align:center;">
-        <button class="btn-gold hidden" id="btnTutorialNext">Siguiente →</button>
-        <button class="btn-primary hidden" id="btnTutorialFinish">Ir al modo práctica →</button>
+      <div class="start-card">
+        <h3>🎮 Modo práctica</h3>
+        <p>Partidas aleatorias contra la IA. Cada partida reparte cartas distintas para que practiques en situaciones nuevas hasta llegar a 21 puntos.</p>
+        <div class="mode-toggle" id="modeToggle">
+          <button class="mode-btn active" id="modeBtnClassic">Clásico</button>
+          <button class="mode-btn" id="modeBtnRoyal">Royal</button>
+        </div>
+        <p class="mode-desc" id="modeDesc">As vale solo 1. Las figuras (J,Q,K) no suman: solo capturan a su misma figura. Son las reglas oficiales estándar.</p>
+        <button class="btn-primary" id="btnStartPractice">Jugar ahora</button>
+      </div>
+      <div class="start-card">
+        <h3>📖 Reglas completas</h3>
+        <p>Consulta el reglamento completo del juego Casino en cualquier momento, con la tabla de puntuación oficial.</p>
+        <button class="btn-ghost" id="btnShowRulesStart">Ver reglas</button>
+      </div>
     </div>
   </div>
 
-    <!-- GAME SCREEN -->
-    <div id="gameScreen">
-      <div id="topbar">
-        <div id="scoreboard">
-          <div class="score-pill"><span class="label">Tú</span><span class="value" id="scoreHuman">0</span></div>
-          <div class="score-pill"><span class="label">IA</span><span class="value" id="scoreAI">0</span></div>
-          <div id="roundInfo">Ronda 1 · meta 21 pts</div>
-        </div>
-        <div id="topbar-actions">
-          <button class="btn-ghost" id="btnHint">💡 Pista</button>
-          <button class="btn-ghost" id="btnShowRules">📖 Reglas</button>
-          <button class="btn-ghost" id="btnNewMatch">🔄 Nueva partida</button>
-        <button class="btn-ghost" id="btnExitGame">🏠 Menú</button>
-        </div>
-      </div>
+  <!-- TUTORIAL SCREEN -->
+  <div id="tutorialScreen">
+    <div id="topbarTutorial" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <h2>🎓 Tutorial</h2>
+      <button class="btn-ghost" id="btnExitTutorial">Salir al menú</button>
+    </div>
+    <div class="tutorial-progress" id="tutorialProgress"></div>
+    <div id="tutorialBubble"></div>
+    <div class="zone-label">Mesa</div>
+    <div id="tutTableZone" class="table-zone-clone"></div>
+    <div class="zone-label" style="margin-top:14px;">Tu mano</div>
+    <div id="tutHandRow" style="display:flex; gap:6px; min-height:96px; align-items:flex-end; flex-wrap:wrap;"></div>
+    <div id="tutActionPanel" style="margin-top:10px;"></div>
+    <div style="margin-top:16px; text-align:center;">
+      <button class="btn-gold hidden" id="btnTutorialNext">Siguiente →</button>
+      <button class="btn-primary hidden" id="btnTutorialFinish">Ir al modo práctica →</button>
+    </div>
+  </div>
 
-      <div class="turn-banner" id="turnBanner">Turno de la IA…</div>
+  <!-- GAME SCREEN -->
+  <div id="gameScreen">
+    <div id="topbar">
+      <div id="scoreboard">
+        <div class="score-pill"><span class="label">Tú</span><span class="value" id="scoreHuman">0</span></div>
+        <div class="score-pill"><span class="label">IA</span><span class="value" id="scoreAI">0</span></div>
+        <div id="roundInfo">Ronda 1 · meta 21 pts</div>
+      </div>
+      <div id="topbar-actions">
+        <button class="btn-ghost" id="btnHint">💡 Pista</button>
+        <button class="btn-ghost" id="btnShowRules">📖 Reglas</button>
+        <button class="btn-ghost" id="btnNewMatch">🔄 Nueva partida</button>
+        <button class="btn-ghost" id="btnExitGame">🏠 Menú</button>
+      </div>
+    </div>
+
+    <div class="turn-banner" id="turnBanner">Turno de la IA…</div>
 
     <div id="aiZone">
       <div class="zone-label">IA (mano: <span id="aiHandCount">0</span> cartas)</div>
       <div id="aiHand"></div>
     </div>
 
-      <div class="zone-label">Mesa</div>
-      <div id="tableZone"></div>
+    <div class="zone-label">Mesa</div>
+    <div id="tableZone"></div>
 
-      <div id="humanZone">
-        <div class="zone-label">Tu mano</div>
-        <div id="handRow"></div>
-      </div>
-
-      <div id="actionPanel">
-        <h4 id="actionPanelTitle">Elige una jugada</h4>
-      <div class="action-list" id="actionList"></div>
-      <button class="btn-ghost" id="btnCancelSelection" style="margin-top:8px;">Cancelar</button>
-      </div>
-
-      <div id="logPanel"></div>
+    <div id="manualPanel" class="hidden">
+      <div class="manual-title">🖐️ Selección manual — toca las cartas o construcciones de la mesa que quieras usar</div>
+      <div id="manualChosenList" class="manual-chosen"></div>
+      <div id="manualMatches" class="action-list"></div>
+      <div id="manualHint" class="manual-hint"></div>
     </div>
 
+    <div id="humanZone">
+      <div class="zone-label">Tu mano</div>
+      <div id="handRow"></div>
+    </div>
+
+    <div id="actionPanel">
+      <div class="action-panel-head">
+        <h4 id="actionPanelTitle">Elige una jugada</h4>
+        <button class="btn-ghost" id="btnCancelSelection">✖ Elegir otra carta</button>
+      </div>
+      <div class="action-list" id="actionList"></div>
+    </div>
+
+    <div id="logPanel"></div>
   </div>
 
-  <!-- RULES MODAL -->
-  <div class="modal-overlay" id="rulesModal">
-    <div class="modal-box">
-      <h2>📖 Reglas del Casino</h2>
+</div>
+
+<!-- RULES MODAL -->
+<div class="modal-overlay" id="rulesModal">
+  <div class="modal-box">
+    <h2>📖 Reglas del Casino</h2>
     <p><b>Objetivo:</b> capturar cartas de la mesa combinándolas con las de tu mano. Gana quien llegue primero a <b>21 puntos</b>, sumados a lo largo de varias rondas.</p>
 
     <h4>Reparto</h4>
     <p>Se reparten 4 cartas a cada jugador y 4 cartas boca arriba en el centro (la mesa). Cuando ambas manos se vacían, se reparten 4 cartas más a cada jugador (sin agregar cartas nuevas a la mesa), y así sucesivamente hasta agotar el mazo.</p>
 
-      <h4>En tu turno debes jugar una carta de tu mano para...</h4>
-      <p><b>1. Capturar</b> — con una carta numérica (A–10) puedes capturar una o varias cartas sueltas de la mesa cuya suma sea igual al valor de tu carta (el As vale 1). También puedes capturar una <i>construcción</i> completa si su valor coincide. Con una figura (J, Q, K) solo puedes capturar una figura suelta del mismo rango.</p>
-      <p><b>2. Construir</b> — combina tu carta con cartas sueltas de la mesa para formar una "construcción" con un valor objetivo (por ejemplo, 3+4 = construcción de 7). Solo puedes construir si tienes en la mano otra carta capaz de capturar esa construcción más adelante. Una construcción puede ser robada por el rival si él también tiene una carta de ese valor.</p>
-      <p><b>3. Descartar</b> — si no capturas ni construyes, dejas tu carta suelta en la mesa. <i>Excepción:</i> si tú creaste o modificaste por última vez una construcción que sigue en pie sin que el rival la haya tocado, no puedes simplemente descartar: debes capturarla, ampliarla o construir otra cosa.</p>
+    <h4>En tu turno debes jugar una carta de tu mano para...</h4>
+    <p><b>1. Capturar</b> — con una carta numérica (A–10) puedes capturar una o varias cartas sueltas de la mesa cuya suma sea igual al valor de tu carta (el As vale 1). También puedes capturar una <i>construcción</i> completa si su valor coincide. Con una figura (J, Q, K) solo puedes capturar una figura suelta del mismo rango.</p>
+    <p><b>2. Construir</b> — combina tu carta con cartas sueltas de la mesa para formar una "construcción" con un valor objetivo (por ejemplo, 3+4 = construcción de 7). Solo puedes construir si tienes en la mano otra carta capaz de capturar esa construcción más adelante. Una construcción puede ser robada por el rival si él también tiene una carta de ese valor.</p>
+    <p><b>3. Descartar</b> — si no capturas ni construyes, dejas tu carta suelta en la mesa. <i>Excepción:</i> si tú creaste o modificaste por última vez una construcción que sigue en pie sin que el rival la haya tocado, no puedes simplemente descartar: debes capturarla, ampliarla o construir otra cosa.</p>
 
     <h4>Tipos de construcción</h4>
     <p><b>Construcción simple:</b> un solo grupo de cartas que suma el valor (ej. 2+3=5). Puedes aumentar su valor añadiendo otra carta de tu mano (si tienes con qué capturar el nuevo valor).</p>
@@ -388,10 +418,9 @@
 (function(){
 "use strict";
 
-
 /* ============================================================
-     UTILIDADES DE CARTAS
-     ============================================================ */
+   UTILIDADES DE CARTAS
+   ============================================================ */
 const SUITS = ['S','H','D','C'];
 const SUIT_SYMBOL = {S:'♠',H:'♥',D:'♦',C:'♣'};
 const SUIT_COLOR  = {S:'black',C:'black',H:'red',D:'red'};
@@ -400,9 +429,9 @@ const RANK_LABEL  = {1:'A',2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9',10:'1
 function makeDeck(){
   const d=[];
   for(const s of SUITS){
-        for(let r=1;r<=13;r++){
+    for(let r=1;r<=13;r++){
       d.push({id:r+s, rank:r, suit:s, isFace:r>10, value:r<=10?r:null});
-  }
+    }
   }
   return d;
 }
@@ -410,38 +439,52 @@ function shuffle(arr){
   for(let i=arr.length-1;i>0;i--){
     const j=Math.floor(Math.random()*(i+1));
     [arr[i],arr[j]]=[arr[j],arr[i]];
-}
+  }
   return arr;
 }
 function cardLabel(c){ return RANK_LABEL[c.rank]+SUIT_SYMBOL[c.suit]; }
+
+// Valores numéricos posibles de una carta según el modo de juego.
+// Clásico: A=1, 2..10 su rango, figuras (J,Q,K) sin valor numérico ([]).
+// Royal:   A=1 o 14 (a elección), J=11, Q=12, K=13, 2..10 su rango.
+function cardValues(card, mode){
+  if(mode==='royal'){
+    if(card.rank===1) return [1,14];
+    return [card.rank];
+  }
+  if(card.rank===1) return [1];
+  if(card.rank>10) return [];
+  return [card.rank];
+}
 
 let _uid=1;
 function newId(prefix){ return prefix+'_'+(_uid++); }
 
 /* ============================================================
-     MOTOR DEL JUEGO (ENGINE)
-     ============================================================ */
+   MOTOR DEL JUEGO (ENGINE)
+   ============================================================ */
 function createGame(){
-    return {
-          deck:[],
-          table:[],           // array of {type:'loose', id, card} | {type:'build', id, value, groups:[[card,...]], owner, multiple, lastTouchedBy}
-          players:{
-            human:{hand:[], captured:[], sweeps:0},
+  return {
+    mode:'classic',    // 'classic' | 'royal'
+    deck:[],
+    table:[],           // array of {type:'loose', id, card} | {type:'build', id, value, groups:[[card,...]], owner, multiple, lastTouchedBy}
+    players:{
+      human:{hand:[], captured:[], sweeps:0},
       ai:{hand:[], captured:[], sweeps:0}
     },
     turn:'human',
-          starter:'human',
-          lastCapturer:null,
-          round:1,
-          totalScore:{human:0, ai:0},
-          log:[],
-          matchOver:false,
-          winner:null
-      };
+    starter:'human',
+    lastCapturer:null,
+    round:1,
+    totalScore:{human:0, ai:0},
+    log:[],
+    matchOver:false,
+    winner:null
+  };
 }
 
 function dealNewRound(game){
-    game.deck = shuffle(makeDeck());
+  game.deck = shuffle(makeDeck());
   game.table = [];
   game.players.human.hand=[]; game.players.human.captured=[]; game.players.human.sweeps=0;
   game.players.ai.hand=[];    game.players.ai.captured=[];    game.players.ai.sweeps=0;
@@ -461,13 +504,13 @@ function dealNewRound(game){
 }
 
 function addLog(game, msg){
-    game.log.push(msg);
+  game.log.push(msg);
   if(game.log.length>200) game.log.shift();
 }
 
 function findTableItem(game, id){ return game.table.find(t=>t.id===id); }
 function removeTableItem(game, id){
-    const idx=game.table.findIndex(t=>t.id===id);
+  const idx=game.table.findIndex(t=>t.id===id);
   if(idx>=0) game.table.splice(idx,1);
 }
 function buildCardCount(b){ return b.groups.reduce((s,g)=>s+g.length,0); }
@@ -476,11 +519,11 @@ function describeBuild(b){ return b.groups.map(g=>g.map(cardLabel).join('+')).jo
 
 /* ---- combinaciones ---- */
 function subsetSumsExact(items, target){
-    // items: [{id,value}], devuelve arreglos de ids cuyo valor suma exactamente target
+  // items: [{id,value}], devuelve arreglos de ids cuyo valor suma exactamente target
   const results=[];
   const n=items.length;
   function bt(start, remaining, chosen){
-        if(remaining===0 && chosen.length>0){ results.push(chosen.slice()); return; }
+    if(remaining===0 && chosen.length>0){ results.push(chosen.slice()); return; }
     if(remaining<=0) return;
     for(let i=start;i<n;i++){
       const it=items[i];
@@ -495,12 +538,12 @@ function subsetSumsExact(items, target){
   return results;
 }
 function subsetsUpTo(items, maxSum){
-    // devuelve [{ids,sum}] para todos los subconjuntos no vacíos con suma <= maxSum
+  // devuelve [{ids,sum}] para todos los subconjuntos no vacíos con suma <= maxSum
   const results=[];
   if(maxSum<=0) return results;
   const n=items.length;
   function bt(start, chosen, sum){
-        if(chosen.length>0) results.push({ids:chosen.slice(), sum});
+    if(chosen.length>0) results.push({ids:chosen.slice(), sum});
     for(let i=start;i<n;i++){
       const it=items[i];
       if(sum+it.value<=maxSum){
@@ -514,9 +557,158 @@ function subsetsUpTo(items, maxSum){
   return results;
 }
 
+/* ---- combinaciones con múltiples valores posibles por carta (modo Royal, por los Ases) ---- */
+function subsetSumsExactMulti(items, target){
+  // items: [{id, values:[...]}], devuelve [{ids, vals:{id:valorUsado}}]
+  const results=[];
+  const n=items.length;
+  function bt(start, remaining, chosenIds, chosenVals){
+    if(remaining===0 && chosenIds.length>0){ results.push({ids:chosenIds.slice(), vals:Object.assign({},chosenVals)}); return; }
+    if(remaining<0) return;
+    for(let i=start;i<n;i++){
+      const it=items[i];
+      for(const val of it.values){
+        if(val<=remaining){
+          chosenIds.push(it.id); chosenVals[it.id]=val;
+          bt(i+1, remaining-val, chosenIds, chosenVals);
+          chosenIds.pop(); delete chosenVals[it.id];
+        }
+      }
+    }
+  }
+  bt(0,target,[],{});
+  return results;
+}
+function subsetsUpToMulti(items, maxSum){
+  const results=[];
+  if(maxSum<=0) return results;
+  const n=items.length;
+  function bt(start, chosenIds, chosenVals, sum){
+    if(chosenIds.length>0) results.push({ids:chosenIds.slice(), vals:Object.assign({},chosenVals), sum});
+    for(let i=start;i<n;i++){
+      const it=items[i];
+      for(const val of it.values){
+        if(sum+val<=maxSum){
+          chosenIds.push(it.id); chosenVals[it.id]=val;
+          bt(i+1, chosenIds, chosenVals, sum+val);
+          chosenIds.pop(); delete chosenVals[it.id];
+        }
+      }
+    }
+  }
+  bt(0,[],{},0);
+  return results;
+}
+
+/* ---- generación de jugadas legales — modo Royal Casino ----
+   J=11, Q=12, K=13 y As=1 o 14 (a elección) participan en sumas y construcciones
+   como cualquier carta numérica; ya no existe la captura exclusiva "misma figura". */
+const ROYAL_MAX = 14;
+function getLegalActionsRoyal(game, playerId, card){
+  const player = game.players[playerId];
+  const hand = player.hand;
+  const table = game.table;
+  const looseNumeral = table.filter(t=>t.type==='loose').map(t=>({id:t.id, values:cardValues(t.card,'royal')}));
+  const builds = table.filter(t=>t.type==='build');
+  const numeralActions=[];
+
+  const handMatchExists = (val, excludeId)=> hand.some(h=>h.id!==excludeId && cardValues(h,'royal').includes(val));
+
+  const cardVals = cardValues(card,'royal');
+  cardVals.forEach(v=>{
+    const valTag = (cardVals.length>1) ? ` (usando ${cardLabel(card)}=${v})` : '';
+
+    const combos = subsetSumsExactMulti(looseNumeral, v);
+    combos.forEach(({ids})=>{
+      const cs = ids.map(id=>findTableItem(game,id).card);
+      const txt = cs.length===1 ? `${cardLabel(cs[0])}` : cs.map(cardLabel).join(' + ')+` (= ${v})`;
+      numeralActions.push({type:'captureLoose', label:`Capturar ${txt} con ${cardLabel(card)}${valTag}`,
+                    looseIds:ids, buildIds:[], count:ids.length, usedValue:v});
+    });
+
+    const matchingBuilds = builds.filter(b=>b.value===v);
+    matchingBuilds.forEach(b=>{
+      numeralActions.push({type:'captureBuild', label:`Capturar construcción de ${v} [${describeBuild(b)}] con ${cardLabel(card)}${valTag}`,
+                    looseIds:[], buildIds:[b.id], count:buildCardCount(b), usedValue:v});
+      combos.forEach(({ids})=>{
+        const cs = ids.map(id=>findTableItem(game,id).card);
+        numeralActions.push({type:'captureBuild', label:`Capturar construcción de ${v} [${describeBuild(b)}] + ${cs.map(cardLabel).join('+')} con ${cardLabel(card)}${valTag}`,
+                      looseIds:ids, buildIds:[b.id], count:buildCardCount(b)+ids.length, usedValue:v});
+      });
+    });
+    if(matchingBuilds.length>1){
+      numeralActions.push({type:'captureBuild', label:`Capturar ambas construcciones de ${v} con ${cardLabel(card)}${valTag}`,
+                    looseIds:[], buildIds:matchingBuilds.map(b=>b.id),
+                    count:matchingBuilds.reduce((s,b)=>s+buildCardCount(b),0), usedValue:v});
+    }
+
+    const subs = subsetsUpToMulti(looseNumeral, ROYAL_MAX-v);
+    subs.forEach(({ids,sum})=>{
+      const newValue=v+sum;
+      if(newValue>=2 && newValue<=ROYAL_MAX && handMatchExists(newValue, card.id)){
+        const cs = ids.map(id=>findTableItem(game,id).card);
+        numeralActions.push({type:'buildNew', label:`Construir ${newValue} (${cardLabel(card)}${valTag} + ${cs.map(cardLabel).join('+')})`,
+                      looseIds:ids, buildIds:[], value:newValue, count:0, usedValue:v});
+      }
+    });
+
+    builds.filter(b=>!b.multiple).forEach(b=>{
+      const newValue=b.value+v;
+      if(newValue<=ROYAL_MAX && handMatchExists(newValue, card.id)){
+        numeralActions.push({type:'increaseBuild', label:`Aumentar construcción de ${b.value} a ${newValue} con ${cardLabel(card)}${valTag}`,
+                      looseIds:[], buildIds:[b.id], value:newValue, count:0, usedValue:v});
+      }
+    });
+
+    builds.forEach(b=>{
+      const need=b.value-v;
+      if(need===0 && handMatchExists(b.value, card.id)){
+        numeralActions.push({type:'addGroup', label:`Agregar ${cardLabel(card)}${valTag} como nuevo grupo a construcción de ${b.value}`,
+                      looseIds:[], buildIds:[b.id], value:b.value, count:0, usedValue:v});
+      } else if(need>0){
+        const subs2 = subsetSumsExactMulti(looseNumeral, need);
+        subs2.forEach(({ids})=>{
+          if(handMatchExists(b.value, card.id)){
+            const cs = ids.map(id=>findTableItem(game,id).card);
+            numeralActions.push({type:'addGroup', label:`Agregar ${cardLabel(card)}${valTag}+${cs.map(cardLabel).join('+')} como grupo a construcción de ${b.value}`,
+                          looseIds:ids, buildIds:[b.id], value:b.value, count:0, usedValue:v});
+          }
+        });
+      }
+    });
+  });
+
+  // Regla de seguridad: si NINGUNO de los valores posibles de esta carta tiene respaldo
+  // en otra carta de la mano, y esta carta es responsable de una construcción con ese
+  // valor, no se puede usar para nada que no sea resolver esa construcción.
+  const responsibleBuilds = builds.filter(b=>b.lastTouchedBy===playerId);
+  const soleReserveActive = cardVals.some(v=>
+    handMatchExists(v, card.id)===false && responsibleBuilds.some(b=>b.value===v)
+  );
+  let finalNumeralActions = numeralActions;
+  if(soleReserveActive){
+    const responsibleIds = responsibleBuilds
+      .filter(b=> cardVals.includes(b.value) && handMatchExists(b.value, card.id)===false)
+      .map(b=>b.id);
+    finalNumeralActions = numeralActions.filter(a=>
+      (a.buildIds && a.buildIds.length>0 && a.buildIds.some(id=>responsibleIds.includes(id)))
+    );
+  }
+
+  const actions=[...finalNumeralActions];
+  const hasObligation = builds.some(b=>b.lastTouchedBy===playerId);
+  if(!hasObligation){
+    actions.push({type:'trail', label:`Descartar ${cardLabel(card)} en la mesa`, looseIds:[], buildIds:[], count:0});
+  }
+  const rank = a => a.type.startsWith('capture') ? 0 : (a.type==='trail'?2:1);
+  actions.sort((a,b)=> rank(a)-rank(b) || (b.count-a.count));
+  return actions;
+}
+
 /* ---- generación de jugadas legales ---- */
 function getLegalActions(game, playerId, card){
-    const player = game.players[playerId];
+  if((game.mode||'classic')==='royal') return getLegalActionsRoyal(game, playerId, card);
+  const player = game.players[playerId];
   const hand = player.hand;
   const table = game.table;
   const looseNumeral = table.filter(t=>t.type==='loose' && t.card.value!==null)
@@ -529,11 +721,11 @@ function getLegalActions(game, playerId, card){
 
   if(card.isFace){
     looseFace.forEach(t=>{
-            if(t.card.rank===card.rank){
-              actions.push({type:'captureFace', label:`Capturar ${cardLabel(t.card)} con ${cardLabel(card)}`,
-                            looseIds:[t.id], buildIds:[], count:1});
+      if(t.card.rank===card.rank){
+        actions.push({type:'captureFace', label:`Capturar ${cardLabel(t.card)} con ${cardLabel(card)}`,
+                      looseIds:[t.id], buildIds:[], count:1});
       }
-      });
+    });
   } else {
     const v=card.value;
     const numeralActions=[];
@@ -541,66 +733,66 @@ function getLegalActions(game, playerId, card){
     // captura por suma de cartas sueltas
     const combos = subsetSumsExact(looseNumeral, v);
     combos.forEach(ids=>{
-            const cs = ids.map(id=>findTableItem(game,id).card);
-            const txt = cs.length===1 ? `${cardLabel(cs[0])}` : cs.map(cardLabel).join(' + ')+` (= ${v})`;
+      const cs = ids.map(id=>findTableItem(game,id).card);
+      const txt = cs.length===1 ? `${cardLabel(cs[0])}` : cs.map(cardLabel).join(' + ')+` (= ${v})`;
       numeralActions.push({type:'captureLoose', label:`Capturar ${txt} con ${cardLabel(card)}`,
-                            looseIds:ids, buildIds:[], count:ids.length});
-  });
+                    looseIds:ids, buildIds:[], count:ids.length});
+    });
 
     // captura de construcciones con ese valor
     const matchingBuilds = builds.filter(b=>b.value===v);
     matchingBuilds.forEach(b=>{
-            numeralActions.push({type:'captureBuild', label:`Capturar construcción de ${v} [${describeBuild(b)}] con ${cardLabel(card)}`,
-                          looseIds:[], buildIds:[b.id], count:buildCardCount(b)});
-            combos.forEach(ids=>{
-                      const cs = ids.map(id=>findTableItem(game,id).card);
-                      numeralActions.push({type:'captureBuild', label:`Capturar construcción de ${v} [${describeBuild(b)}] + ${cs.map(cardLabel).join('+')} con ${cardLabel(card)}`,
-                        looseIds:ids, buildIds:[b.id], count:buildCardCount(b)+ids.length});
-});
-                                                                                                                                                                                                                      });
+      numeralActions.push({type:'captureBuild', label:`Capturar construcción de ${v} [${describeBuild(b)}] con ${cardLabel(card)}`,
+                    looseIds:[], buildIds:[b.id], count:buildCardCount(b)});
+      combos.forEach(ids=>{
+        const cs = ids.map(id=>findTableItem(game,id).card);
+        numeralActions.push({type:'captureBuild', label:`Capturar construcción de ${v} [${describeBuild(b)}] + ${cs.map(cardLabel).join('+')} con ${cardLabel(card)}`,
+                      looseIds:ids, buildIds:[b.id], count:buildCardCount(b)+ids.length});
+      });
+    });
     if(matchingBuilds.length>1){
       numeralActions.push({type:'captureBuild', label:`Capturar ambas construcciones de ${v} con ${cardLabel(card)}`,
-                            looseIds:[], buildIds:matchingBuilds.map(b=>b.id),
-                            count:matchingBuilds.reduce((s,b)=>s+buildCardCount(b),0)});
+                    looseIds:[], buildIds:matchingBuilds.map(b=>b.id),
+                    count:matchingBuilds.reduce((s,b)=>s+buildCardCount(b),0)});
     }
 
     // construir nueva
     const subs = subsetsUpTo(looseNumeral, 10-v);
     subs.forEach(({ids,sum})=>{
-            const newValue=v+sum;
+      const newValue=v+sum;
       if(newValue>=2 && newValue<=10 && handMatchExists(newValue, card.id)){
         const cs = ids.map(id=>findTableItem(game,id).card);
         numeralActions.push({type:'buildNew', label:`Construir ${newValue} (${cardLabel(card)} + ${cs.map(cardLabel).join('+')})`,
-                                looseIds:ids, buildIds:[], value:newValue, count:0});
-}
-});
+                      looseIds:ids, buildIds:[], value:newValue, count:0});
+      }
+    });
 
     // aumentar construcción simple existente
     builds.filter(b=>!b.multiple).forEach(b=>{
-            const newValue=b.value+v;
+      const newValue=b.value+v;
       if(newValue<=10 && handMatchExists(newValue, card.id)){
         numeralActions.push({type:'increaseBuild', label:`Aumentar construcción de ${b.value} a ${newValue} con ${cardLabel(card)}`,
-                                looseIds:[], buildIds:[b.id], value:newValue, count:0});
-}
-});
+                      looseIds:[], buildIds:[b.id], value:newValue, count:0});
+      }
+    });
 
     // agregar grupo a construcción existente (misma valor -> múltiple)
     builds.forEach(b=>{
-            const need=b.value-v;
+      const need=b.value-v;
       if(need===0 && handMatchExists(b.value, card.id)){
         numeralActions.push({type:'addGroup', label:`Agregar ${cardLabel(card)} como nuevo grupo a construcción de ${b.value}`,
-                                looseIds:[], buildIds:[b.id], value:b.value, count:0});
-} else if(need>0){
+                      looseIds:[], buildIds:[b.id], value:b.value, count:0});
+      } else if(need>0){
         const subs2 = subsetSumsExact(looseNumeral, need);
         subs2.forEach(ids=>{
-                    if(handMatchExists(b.value, card.id)){
-                      const cs = ids.map(id=>findTableItem(game,id).card);
-                      numeralActions.push({type:'addGroup', label:`Agregar ${cardLabel(card)}+${cs.map(cardLabel).join('+')} como grupo a construcción de ${b.value}`,
+          if(handMatchExists(b.value, card.id)){
+            const cs = ids.map(id=>findTableItem(game,id).card);
+            numeralActions.push({type:'addGroup', label:`Agregar ${cardLabel(card)}+${cs.map(cardLabel).join('+')} como grupo a construcción de ${b.value}`,
                           looseIds:ids, buildIds:[b.id], value:b.value, count:0});
-}
-});
-}
-});
+          }
+        });
+      }
+    });
 
     // Regla de seguridad: si esta es tu ÚNICA carta que puede capturar una construcción
     // que TÚ eres responsable de (la creaste o la modificaste por última vez), no puedes
@@ -612,17 +804,17 @@ function getLegalActions(game, playerId, card){
     if(isSoleReserve){
       const responsibleIds = builds.filter(b=>b.lastTouchedBy===playerId && b.value===v).map(b=>b.id);
       finalNumeralActions = numeralActions.filter(a=>
-                (a.buildIds && a.buildIds.length>0 && a.buildIds.some(id=>responsibleIds.includes(id)))
-              );
+        (a.buildIds && a.buildIds.length>0 && a.buildIds.some(id=>responsibleIds.includes(id)))
+      );
     }
     actions.push(...finalNumeralActions);
-}
+  }
 
   // descartar (trail) — bloqueado si el jugador tiene una construcción pendiente sin tocar por el rival
   const hasObligation = builds.some(b=>b.lastTouchedBy===playerId);
   if(!hasObligation){
     actions.push({type:'trail', label:`Descartar ${cardLabel(card)} en la mesa`, looseIds:[], buildIds:[], count:0});
-}
+  }
 
   // prioriza: capturas (más cartas primero), luego construir, luego descartar
   const rank = a => a.type.startsWith('capture') ? 0 : (a.type==='trail'?2:1);
@@ -646,25 +838,25 @@ function applyAction(game, playerId, card, action){
   let sweepHappened=false;
 
   switch(action.type){
-case 'trail': {
+    case 'trail': {
       game.table.push({type:'loose', id:card.id, card});
       addLog(game, `${who(playerId)} descarta ${cardLabel(card)} en la mesa.`);
       break;
-}
-case 'captureFace':
-case 'captureLoose': {
+    }
+    case 'captureFace':
+    case 'captureLoose': {
       const cards=[card];
       action.looseIds.forEach(id=>{ const it=findTableItem(game,id); cards.push(it.card); removeTableItem(game,id); });
       player.captured.push(...cards);
       captured=true;
       addLog(game, `${who(playerId)} captura ${cards.map(cardLabel).join(', ')}.`);
       break;
-}
-case 'captureBuild': {
+    }
+    case 'captureBuild': {
       const cards=[card];
       action.buildIds.forEach(bid=>{
-                const b=findTableItem(game,bid);
-                cards.push(...buildAllCards(b));
+        const b=findTableItem(game,bid);
+        cards.push(...buildAllCards(b));
         removeTableItem(game,bid);
       });
       action.looseIds.forEach(id=>{ const it=findTableItem(game,id); cards.push(it.card); removeTableItem(game,id); });
@@ -672,16 +864,16 @@ case 'captureBuild': {
       captured=true;
       addLog(game, `${who(playerId)} captura una construcción con ${cardLabel(card)} (${cards.length} cartas).`);
       break;
-}
-case 'buildNew': {
+    }
+    case 'buildNew': {
       const groupCards=[card];
       action.looseIds.forEach(id=>{ const it=findTableItem(game,id); groupCards.push(it.card); removeTableItem(game,id); });
       const build={type:'build', id:newId('b'), value:action.value, groups:[groupCards], multiple:false, owner:playerId, lastTouchedBy:playerId};
       game.table.push(build);
       addLog(game, `${who(playerId)} construye ${action.value} con ${groupCards.map(cardLabel).join('+')}.`);
       break;
-}
-case 'increaseBuild': {
+    }
+    case 'increaseBuild': {
       const b=findTableItem(game, action.buildIds[0]);
       b.groups[0].push(card);
       b.value=action.value;
@@ -689,8 +881,8 @@ case 'increaseBuild': {
       b.lastTouchedBy=playerId;
       addLog(game, `${who(playerId)} aumenta la construcción a ${action.value} con ${cardLabel(card)}.`);
       break;
-}
-case 'addGroup': {
+    }
+    case 'addGroup': {
       const b=findTableItem(game, action.buildIds[0]);
       const groupCards=[card];
       action.looseIds.forEach(id=>{ const it=findTableItem(game,id); groupCards.push(it.card); removeTableItem(game,id); });
@@ -699,8 +891,8 @@ case 'addGroup': {
       b.lastTouchedBy=playerId;
       addLog(game, `${who(playerId)} agrega un grupo (${groupCards.map(cardLabel).join('+')}) a la construcción de ${b.value}, ahora es múltiple.`);
       break;
-}
-}
+    }
+  }
 
   if(captured){
     game.lastCapturer=playerId;
@@ -708,8 +900,8 @@ case 'addGroup': {
       player.sweeps++;
       sweepHappened=true;
       addLog(game, `🧹 ¡Barrida de ${who(playerId)}! +1 punto de barrida.`);
-}
-}
+    }
+  }
 
   return {captured, sweepHappened};
 }
@@ -722,7 +914,7 @@ function maybeRedeal(game){
     for(let i=0;i<n;i++) game.players.human.hand.push(game.deck.pop());
     for(let i=0;i<n && game.deck.length>0;i++) game.players.ai.hand.push(game.deck.pop());
     addLog(game, `Nuevo reparto: 4 cartas para cada jugador (quedan ${game.deck.length} en el mazo).`);
-}
+  }
 }
 
 function isRoundOver(game){
@@ -734,7 +926,7 @@ function scoreRound(game){
     const cards = game.table.flatMap(t=> t.type==='loose' ? [t.card] : buildAllCards(t));
     game.players[game.lastCapturer].captured.push(...cards);
     addLog(game, `${who(game.lastCapturer)} se lleva las cartas restantes de la mesa (${cards.length}).`);
-}
+  }
   game.table=[];
 
   const h=game.players.human, a=game.players.ai;
@@ -747,8 +939,8 @@ function scoreRound(game){
       big: cards.some(c=>c.rank===10 && c.suit==='D') ? 2:0,
       little: cards.some(c=>c.rank===2 && c.suit==='S') ? 1:0,
       sweeps: p.sweeps
-};
-};
+    };
+  };
   const hs=stat(h), as=stat(a);
   const hScore = {mostCards:0, mostSpades:0, aces:hs.aces, big:hs.big, little:hs.little, sweeps:hs.sweeps};
   const aScore = {mostCards:0, mostSpades:0, aces:as.aces, big:as.big, little:as.little, sweeps:as.sweeps};
@@ -769,11 +961,11 @@ function scoreRound(game){
     if(game.totalScore.human===game.totalScore.ai){
       // empate exacto en 21+: se juega otra ronda
       result.tieContinue=true;
-} else {
+    } else {
       game.matchOver=true;
       game.winner = game.totalScore.human>game.totalScore.ai ? 'human':'ai';
-}
-}
+    }
+  }
   return result;
 }
 
@@ -799,17 +991,17 @@ function scoreAction(game, playerId, card, action){
       if(c.rank===10 && c.suit==='D') score+=8;
       if(c.rank===2 && c.suit==='S') score+=4;
       if(c.suit==='S') score+=1;
-});
+    });
     // simular si deja la mesa vacía -> barrida
     const remainingTable = game.table.filter(t=>{
       if(action.buildIds.includes(t.id)) return false;
       if(action.looseIds.includes(t.id)) return false;
       return true;
-});
+    });
     if(remainingTable.length===0) score+=40;
-} else if(action.type==='buildNew' || action.type==='increaseBuild' || action.type==='addGroup'){
+  } else if(action.type==='buildNew' || action.type==='increaseBuild' || action.type==='addGroup'){
     score += 9;
-} else if(action.type==='trail'){
+  } else if(action.type==='trail'){
     score += 4;
     // penalizar si deja una suma fácil para el rival
     const looseVals = game.table.filter(t=>t.type==='loose' && t.card.value!==null).map(t=>t.card.value);
@@ -817,10 +1009,10 @@ function scoreAction(game, playerId, card, action){
     for(let target=1; target<=10; target++){
       const combos = subsetSumsExact(looseVals.map((v,i)=>({id:i,value:v})).concat([{id:'new',value:card.value||0}]), target);
       riskyCombos += combos.filter(c=>c.includes('new')).length;
-}
+    }
     score -= riskyCombos*1.5;
     if(card.isFace) score += 2; // las figuras sueltas son más seguras si no hay pareja en mesa
-}
+  }
   score += Math.random()*3; // variación para que cada partida se sienta distinta
   return score;
 }
@@ -832,8 +1024,8 @@ function aiChooseMove(game){
     for(const action of actions){
       const s = scoreAction(game,'ai',card,action);
       if(!best || s>best.score) best={card, action, score:s};
-}
-}
+    }
+  }
   return best;
 }
 
@@ -843,23 +1035,83 @@ function aiChooseMove(game){
 let G = null;                 // partida actual (modo práctica)
 let selectedCard = null;      // carta de mano seleccionada actualmente
 let selectedActions = [];
+let practiceMode = 'classic'; // modo elegido en el menú para la próxima partida
+let manualSelection = new Set(); // ids de cartas/construcciones de la mesa elegidas manualmente
 
 const el = id=>document.getElementById(id);
 
 function cardEl(card, opts){
   opts=opts||{};
+  const mode = opts.mode || 'classic';
   const d=document.createElement('div');
   d.className = 'card '+SUIT_COLOR[card.suit]+(opts.extra?(' '+opts.extra):'');
   d.dataset.id=card.id;
-  d.innerHTML = `<div class="rank-top">${RANK_LABEL[card.rank]}</div><div class="suit-mid">${SUIT_SYMBOL[card.suit]}</div><div class="rank-bottom">${RANK_LABEL[card.rank]}</div>`;
+  let badge='';
+  if(mode==='royal'){
+    if(card.rank===1) badge='<div class="value-badge">1/14</div>';
+    else if(card.rank>10) badge=`<div class="value-badge">${card.rank}</div>`;
+  }
+  d.innerHTML = `<div class="rank-top">${RANK_LABEL[card.rank]}</div><div class="suit-mid">${SUIT_SYMBOL[card.suit]}</div>${badge}<div class="rank-bottom">${RANK_LABEL[card.rank]}</div>`;
   return d;
+}
+
+/* ---- selección manual de cartas/construcciones de la mesa ---- */
+function tableItemIdSet(a){
+  const s=new Set();
+  (a.looseIds||[]).forEach(id=>s.add(id));
+  (a.buildIds||[]).forEach(id=>s.add(id));
+  return s;
+}
+function setsEqual(a,b){
+  if(a.size!==b.size) return false;
+  for(const x of a) if(!b.has(x)) return false;
+  return true;
+}
+function onTableItemClick(itemId){
+  if(!selectedCard || !G || G.turn!=='human' || G.matchOver) return;
+  if(manualSelection.has(itemId)) manualSelection.delete(itemId); else manualSelection.add(itemId);
+  renderAll();
+}
+function renderManualPanel(){
+  const panel = el('manualPanel');
+  if(!selectedCard){ panel.classList.add('hidden'); return; }
+  panel.classList.remove('hidden');
+
+  const chosenList = el('manualChosenList');
+  if(manualSelection.size===0){
+    chosenList.innerHTML = '<span style="opacity:.6;">(ninguna carta de la mesa seleccionada)</span>';
+  } else {
+    chosenList.innerHTML = Array.from(manualSelection).map(id=>{
+      const it = findTableItem(G,id);
+      if(!it) return '';
+      return it.type==='loose' ? cardLabel(it.card) : `Construcción de ${it.value}`;
+    }).join(', ');
+  }
+
+  const matches = selectedActions.filter(a=> setsEqual(tableItemIdSet(a), manualSelection));
+  const matchesDiv = el('manualMatches'); matchesDiv.innerHTML='';
+  const hint = el('manualHint');
+  if(matches.length===0){
+    hint.textContent = manualSelection.size===0
+      ? 'Toca cartas o construcciones de la mesa para armar tu propia jugada, o usa una sugerencia de arriba.'
+      : 'Esa combinación todavía no forma una jugada válida. Prueba a agregar o quitar cartas.';
+  } else {
+    hint.textContent='';
+    matches.forEach(a=>{
+      const b=document.createElement('button');
+      b.className='action-btn suggested';
+      b.textContent='✅ '+a.label;
+      b.addEventListener('click', ()=> executeHumanAction(a));
+      matchesDiv.appendChild(b);
+    });
+  }
 }
 
 function renderAll(){
   if(!G) return;
   el('scoreHuman').textContent = G.totalScore.human;
   el('scoreAI').textContent = G.totalScore.ai;
-  el('roundInfo').textContent = `Ronda ${G.round} · meta 21 pts`;
+  el('roundInfo').textContent = `Ronda ${G.round} · meta 21 pts` + (G.mode==='royal' ? ' · Royal' : '');
   el('aiHandCount').textContent = G.players.ai.hand.length;
 
   // mano IA (boca abajo)
@@ -871,44 +1123,48 @@ function renderAll(){
   tbl.classList.toggle('empty-hint', G.table.length===0);
   G.table.forEach(t=>{
     if(t.type==='loose'){
-      const c = cardEl(t.card, {extra:'selectable'});
+      const isChosen = manualSelection.has(t.id);
+      const c = cardEl(t.card, {extra:'selectable'+(isChosen?' chosen':''), mode:G.mode});
+      if(selectedCard) c.addEventListener('click', ()=> onTableItemClick(t.id));
       tbl.appendChild(c);
-} else {
-      const pile=document.createElement('div'); pile.className='build-pile';
+    } else {
+      const pile=document.createElement('div'); pile.className='build-pile'+(manualSelection.has(t.id)?' chosen':'');
+      pile.dataset.id=t.id;
       const val=document.createElement('div'); val.className='build-value'; val.textContent='Construcción '+t.value;
       pile.appendChild(val);
       const groups=document.createElement('div'); groups.className='build-groups';
       t.groups.forEach(g=>{
         const gd=document.createElement('div'); gd.className='build-group';
-        g.forEach(c=> gd.appendChild(cardEl(c)));
+        g.forEach(c=> gd.appendChild(cardEl(c, {mode:G.mode})));
         groups.appendChild(gd);
-});
+      });
       pile.appendChild(groups);
       const own=document.createElement('div'); own.className='build-owner';
       own.textContent = (t.owner==='human'?'Tuya':'De la IA') + (t.multiple?' · múltiple':' · simple');
       pile.appendChild(own);
+      if(selectedCard) pile.addEventListener('click', (e)=>{ e.stopPropagation(); onTableItemClick(t.id); });
       tbl.appendChild(pile);
-}
-});
+    }
+  });
 
   // mano humana
   const handDiv = el('handRow'); handDiv.innerHTML='';
   const sortedHand = G.players.human.hand.slice().sort((a,b)=> a.rank-b.rank);
   sortedHand.forEach(card=>{
-    const c = cardEl(card, {extra:'selectable'+(selectedCard && selectedCard.id===card.id?' selected':'')});
+    const c = cardEl(card, {extra:'selectable'+(selectedCard && selectedCard.id===card.id?' selected':''), mode:G.mode});
     c.addEventListener('click', ()=> onHandCardClick(card));
     handDiv.appendChild(c);
-});
+  });
 
   // turno
   const banner = el('turnBanner');
   if(G.matchOver){
     banner.textContent = G.winner==='human' ? '🏆 ¡Ganaste la partida!' : '🏆 La IA ganó la partida.';
     banner.className='turn-banner';
-} else {
+  } else {
     banner.textContent = G.turn==='human' ? 'Tu turno — elige una carta de tu mano' : 'Turno de la IA…';
     banner.className='turn-banner '+(G.turn==='human'?'human':'ai');
-}
+  }
 
   // log
   const logDiv = el('logPanel');
@@ -916,15 +1172,17 @@ function renderAll(){
   logDiv.scrollTop = logDiv.scrollHeight;
 
   el('btnHint').disabled = G.turn!=='human' || G.matchOver;
+  renderManualPanel();
 }
 
 function onHandCardClick(card){
   if(G.turn!=='human' || G.matchOver) return;
   if(selectedCard && selectedCard.id===card.id){
-    selectedCard=null; selectedActions=[]; closeActionPanel(); renderAll(); return;
-                                           }
+    selectedCard=null; selectedActions=[]; manualSelection=new Set(); closeActionPanel(); renderAll(); return;
+  }
   selectedCard = card;
   selectedActions = getLegalActions(G,'human', card);
+  manualSelection = new Set();
   renderAll();
   openActionPanel(null);
 }
@@ -940,25 +1198,25 @@ function openActionPanel(suggested){
     b.textContent=a.label;
     b.addEventListener('click', ()=> executeHumanAction(a));
     list.appendChild(b);
-});
+  });
   if(selectedActions.length===0){
     const p=document.createElement('div');
     p.style.opacity=.7; p.style.fontSize='13px';
     p.textContent='Esta carta no tiene jugadas válidas ahora mismo (quizá tengas una construcción pendiente). Elige otra carta.';
     list.appendChild(p);
-}
+  }
 }
 function closeActionPanel(){ el('actionPanel').classList.remove('active'); }
 
 el('btnCancelSelection').addEventListener('click', ()=>{
-  selectedCard=null; selectedActions=[]; closeActionPanel(); renderAll();
-                                       });
+  selectedCard=null; selectedActions=[]; manualSelection=new Set(); closeActionPanel(); renderAll();
+});
 
 function executeHumanAction(action){
   applyAction(G,'human', selectedCard, action);
-  selectedCard=null; selectedActions=[]; closeActionPanel();
+  selectedCard=null; selectedActions=[]; manualSelection=new Set(); closeActionPanel();
   afterMove();
-  }
+}
 
 function afterMove(){
   maybeRedeal(G);
@@ -966,25 +1224,25 @@ function afterMove(){
   if(isRoundOver(G)){
     setTimeout(()=> showRoundSummary(), 500);
     return;
-}
+  }
   G.turn = G.turn==='human' ? 'ai' : 'human';
   renderAll();
   if(G.turn==='ai' && !G.matchOver){
     setTimeout(runAiTurn, 850);
-}
+  }
 }
 
 function runAiTurn(){
   const choice = aiChooseMove(G);
   if(choice){
     applyAction(G,'ai', choice.card, choice.action);
-}
+  }
   maybeRedeal(G);
   renderAll();
   if(isRoundOver(G)){
     setTimeout(()=> showRoundSummary(), 500);
     return;
-}
+  }
   G.turn='human';
   renderAll();
 }
@@ -1011,27 +1269,28 @@ function showRoundSummary(){
     html += `<h2>${G.winner==='human' ? '🏆 ¡Ganaste la partida!' : '🏆 La IA ganó la partida.'}</h2>
              <button class="btn-primary" id="btnAfterMatch">Jugar otra partida</button>
              <button class="btn-ghost" id="btnAfterMatchMenu" style="margin-left:8px;">Volver al menú</button>`;
-} else {
+  } else {
     html += `<button class="btn-primary" id="btnNextRound">Siguiente ronda →</button>`;
-}
+  }
   box.innerHTML = html;
   overlay.classList.add('active');
 
   if(G.matchOver){
-    el('btnAfterMatch').addEventListener('click', ()=>{ overlay.classList.remove('active'); startPractice(); });
+    el('btnAfterMatch').addEventListener('click', ()=>{ const m=G.mode; overlay.classList.remove('active'); startPractice(m); });
     el('btnAfterMatchMenu').addEventListener('click', ()=>{ overlay.classList.remove('active'); goToMenu(); });
-} else {
+  } else {
     el('btnNextRound').addEventListener('click', ()=>{
       overlay.classList.remove('active');
       startNextRound(G);
       renderAll();
       if(G.turn==='ai') setTimeout(runAiTurn, 850);
-});
-}
+    });
+  }
 }
 
-function startPractice(){
+function startPractice(mode){
   G = createGame();
+  G.mode = mode || practiceMode || 'classic';
   dealNewRound(G);
   showScreen('gameScreen');
   renderAll();
@@ -1047,11 +1306,12 @@ el('btnHint').addEventListener('click', ()=>{
     for(const action of actions){
       const s = scoreAction(G,'human', card, action);
       if(!best || s>best.score) best={card, action, score:s};
-}
-}
+    }
+  }
   if(!best) return;
   selectedCard = best.card;
   selectedActions = getLegalActions(G,'human', best.card);
+  manualSelection = new Set();
   renderAll();
   openActionPanel(best);
 });
@@ -1062,7 +1322,7 @@ el('btnHint').addEventListener('click', ()=>{
 function showScreen(id){
   ['startScreen','tutorialScreen','gameScreen'].forEach(s=>{
     el(s).classList.toggle('active', s===id);
-});
+  });
   if(id==='startScreen'){ el('startScreen').style.display='block'; } else { el('startScreen').style.display='none'; }
 }
 function goToMenu(){
@@ -1071,12 +1331,23 @@ function goToMenu(){
   el('gameScreen').classList.remove('active');
 }
 
-el('btnStartPractice').addEventListener('click', startPractice);
+el('btnStartPractice').addEventListener('click', ()=> startPractice(practiceMode));
 el('btnExitGame').addEventListener('click', goToMenu);
-el('btnNewMatch').addEventListener('click', startPractice);
+el('btnNewMatch').addEventListener('click', ()=> startPractice(G ? G.mode : practiceMode));
 el('btnShowRules').addEventListener('click', ()=> el('rulesModal').classList.add('active'));
 el('btnShowRulesStart').addEventListener('click', ()=> el('rulesModal').classList.add('active'));
 el('btnCloseRules').addEventListener('click', ()=> el('rulesModal').classList.remove('active'));
+
+el('modeBtnClassic').addEventListener('click', ()=>{
+  practiceMode='classic';
+  el('modeBtnClassic').classList.add('active'); el('modeBtnRoyal').classList.remove('active');
+  el('modeDesc').textContent='As vale solo 1. Las figuras (J,Q,K) no suman: solo capturan a su misma figura. Son las reglas oficiales estándar.';
+});
+el('modeBtnRoyal').addEventListener('click', ()=>{
+  practiceMode='royal';
+  el('modeBtnRoyal').classList.add('active'); el('modeBtnClassic').classList.remove('active');
+  el('modeDesc').textContent='As = 1 o 14 (tú eliges cada vez). J=11, Q=12, K=13: todas las cartas suman y se pueden combinar o construir.';
+});
 
 /* ============================================================
    TUTORIAL GUIADO
@@ -1086,44 +1357,44 @@ const tutSteps = buildTutorialSteps();
 function buildTutorialSteps(){
   const c = (r,s)=>{ const rank=r, suit=s; return {id:r+s, rank, suit, isFace:r>10, value:r<=10?r:null}; };
   return [
-{
+    {
       text: `<b>Paso 1 · Captura simple.</b> En la mesa hay un ${cardLabelStatic(3,'D')}. Tienes un ${cardLabelStatic(3,'S')} en la mano: si juegas una carta numérica del mismo valor, capturas la carta de la mesa. Haz clic en tu ${cardLabelStatic(3,'S')} y elige "Capturar".`,
       table:[c(3,'D'), c(9,'H'), c(6,'C')],
       hand:[c(3,'S'), c(5,'D'), c(11,'C')],
       check: (a)=> a.type==='captureLoose'
-},
-{
+    },
+    {
       text: `<b>Paso 2 · Captura por suma.</b> En la mesa hay un ${cardLabelStatic(2,'C')} y un ${cardLabelStatic(5,'H')} (2+5=7). Tienes un ${cardLabelStatic(7,'D')}: al jugarlo puedes capturar ambas cartas a la vez porque suman 7. Elige la jugada que las capture juntas.`,
       table:[c(2,'C'), c(5,'H'), c(9,'S')],
       hand:[c(7,'D'), c(4,'C'), c(13,'H')],
       check: (a)=> a.type==='captureLoose' && a.looseIds.length===2
-},
-{
+    },
+    {
       text: `<b>Paso 3 · Figuras.</b> Las figuras (J, Q, K) no suman: solo capturan a otra figura idéntica. Hay una ${cardLabelStatic(12,'H')} en la mesa y tú tienes la ${cardLabelStatic(12,'S')}. Captúrala.`,
       table:[c(12,'H'), c(6,'D'), c(8,'C')],
       hand:[c(12,'S'), c(3,'C'), c(5,'S')],
       check:(a)=> a.type==='captureFace'
-},
-{
+    },
+    {
       text: `<b>Paso 4 · Construir.</b> No siempre te conviene capturar de inmediato. Hay un ${cardLabelStatic(4,'S')} suelto en la mesa. Si juegas tu ${cardLabelStatic(3,'C')} sobre él, formas una <i>construcción de 7</i> — y como también tienes un ${cardLabelStatic(7,'H')} en la mano, podrás capturarla luego. Elige la jugada "Construir 7".`,
       table:[c(4,'S'), c(9,'D'), c(6,'H')],
       hand:[c(3,'C'), c(7,'H'), c(10,'S')],
       check:(a)=> a.type==='buildNew'
-},
-{
+    },
+    {
       text: `<b>Paso 5 · Capturar tu construcción.</b> ¡Ya tienes una construcción de 7 en la mesa! Ahora juega tu ${cardLabelStatic(7,'H')} para capturarla por completo.`,
       table:null, // se genera dinámicamente a partir del paso anterior
       hand:null,
       dynamicFromPrevBuild:true,
       check:(a)=> a.type==='captureBuild'
-},
-{
+    },
+    {
       text: `<b>Paso 6 · ¡Barrida!</b> Si tu captura deja la mesa completamente vacía, ganas 1 punto extra de "barrida" 🧹. En la mesa solo queda un ${cardLabelStatic(9,'C')} y tú tienes el ${cardLabelStatic(9,'D')}. Captúralo y deja la mesa vacía.`,
-          table:[c(9,'C')],
-          hand:[c(9,'D'), c(11,'H'), c(2,'D')],
-          check:(a)=> a.type==='captureLoose'
+      table:[c(9,'C')],
+      hand:[c(9,'D'), c(11,'H'), c(2,'D')],
+      check:(a)=> a.type==='captureLoose'
     }
-      ];
+  ];
 }
 function cardLabelStatic(r,s){ return RANK_LABEL[r]+SUIT_SYMBOL[s]; }
 
@@ -1132,19 +1403,19 @@ let tutBuildRef=null; // guarda referencia de la construcción creada en el paso
 
 el('btnStartTutorial').addEventListener('click', ()=>{ tutIdx=0; runTutorialStep(); showScreen('tutorialScreen'); });
 el('btnExitTutorial').addEventListener('click', goToMenu);
-  el('btnTutorialFinish').addEventListener('click', startPractice);
+el('btnTutorialFinish').addEventListener('click', ()=> startPractice('classic'));
 el('btnTutorialNext').addEventListener('click', ()=>{ tutIdx++; runTutorialStep(); });
 
 function runTutorialStep(){
-    el('btnTutorialNext').classList.add('hidden');
+  el('btnTutorialNext').classList.add('hidden');
   el('btnTutorialFinish').classList.add('hidden');
   el('tutorialProgress').textContent = `Paso ${tutIdx+1} de ${tutSteps.length}`;
 
   if(tutIdx>=tutSteps.length){
     el('tutorialBubble').innerHTML = `<b>¡Felicidades!</b> Completaste el tutorial. Ya conoces las capturas simples, por suma, por figura, las construcciones y las barridas. Ahora practica con partidas reales — cada una reparte cartas distintas.`;
     el('tutTableZone').innerHTML=''; el('tutHandRow').innerHTML=''; el('tutActionPanel').innerHTML='';
-          el('btnTutorialFinish').classList.remove('hidden');
-                return;
+    el('btnTutorialFinish').classList.remove('hidden');
+    return;
   }
 
   const step = tutSteps[tutIdx];
@@ -1158,23 +1429,22 @@ function runTutorialStep(){
   if(step.dynamicFromPrevBuild && tutBuildRef){
     TG.table = [tutBuildRef];
     TG.players.human.hand = [ {id:'7H_tut', rank:7, suit:'H', isFace:false, value:7}, {id:'10S_tut', rank:10, suit:'S', isFace:false, value:10} ];
-} else {
+  } else {
     TG.table = step.table.map(c=>({type:'loose', id:c.id, card:c}));
     TG.players.human.hand = step.hand.slice();
-}
+  }
   TG.players.ai.hand=[];
   TG.turn='human';
 
   renderTutorial();
 }
 
-
 function renderTutorial(){
-    const TG = window._tutGame;
+  const TG = window._tutGame;
   const tbl = el('tutTableZone'); tbl.innerHTML='';
-      tbl.style.cssText='background:rgba(0,0,0,.18);border:2px dashed rgba(255,255,255,.18);border-radius:16px;min-height:120px;padding:16px;display:flex;flex-wrap:wrap;gap:14px;';
+  tbl.style.cssText='background:rgba(0,0,0,.18);border:2px dashed rgba(255,255,255,.18);border-radius:16px;min-height:120px;padding:16px;display:flex;flex-wrap:wrap;gap:14px;';
   TG.table.forEach(t=>{
-        if(t.type==='loose'){ tbl.appendChild(cardEl(t.card)); }
+    if(t.type==='loose'){ tbl.appendChild(cardEl(t.card)); }
     else {
       const pile=document.createElement('div'); pile.className='build-pile';
       const val=document.createElement('div'); val.className='build-value'; val.textContent='Construcción '+t.value;
@@ -1183,15 +1453,15 @@ function renderTutorial(){
       t.groups.forEach(g=>{ const gd=document.createElement('div'); gd.className='build-group'; g.forEach(c=>gd.appendChild(cardEl(c))); groups.appendChild(gd); });
       pile.appendChild(groups);
       tbl.appendChild(pile);
-}
-});
+    }
+  });
 
   const handDiv = el('tutHandRow'); handDiv.innerHTML='';
   TG.players.human.hand.forEach(card=>{
     const c = cardEl(card, {extra:'selectable'});
     c.addEventListener('click', ()=> onTutCardClick(card));
     handDiv.appendChild(c);
-});
+  });
   el('tutActionPanel').innerHTML='';
 }
 
@@ -1209,18 +1479,19 @@ function onTutCardClick(card){
       if(step.check(a)){
         if(a.type==='buildNew'){
           tutBuildRef = TG.table.find(t=>t.type==='build');
-}
+        }
         el('tutorialBubble').innerHTML += `<div style="margin-top:8px;color:#8fe3c7;">✅ ¡Correcto! ${TG.log[TG.log.length-1]}</div>`;
         el('btnTutorialNext').classList.remove('hidden');
         renderTutorial();
+        // deshabilitar más clicks salvo "siguiente"
         el('tutHandRow').querySelectorAll('.card').forEach(cd=> cd.style.pointerEvents='none');
-} else {
+      } else {
         renderTutorial();
         el('tutorialBubble').innerHTML += `<div style="margin-top:8px;color:#f2a65a;">Esa jugada es válida, pero no es la que buscamos en este paso. Vuelve a intentarlo.</div>`;
-}
-});
+      }
+    });
     list.appendChild(b);
-});
+  });
   panel.appendChild(list);
 }
 
@@ -1228,6 +1499,8 @@ function onTutCardClick(card){
    HOOKS DE DEPURACIÓN / PRUEBAS AUTOMATIZADAS
    ============================================================ */
 window.__IS_HUMAN_TURN__ = function(){ return !!(G && G.turn==='human' && !G.matchOver); };
+window.__SELECTED_ACTIONS__ = function(){ return selectedActions; };
+window.__GAME_MODE__ = function(){ return G ? G.mode : null; };
 window.__GAME_DEBUG__ = function(){
   if(!G) return {ok:true, note:'no game yet'};
   const seen = {};
@@ -1236,8 +1509,8 @@ window.__GAME_DEBUG__ = function(){
     cards.forEach(c=>{
       total++;
       if(seen[c.id]) seen[c.id].push(label); else seen[c.id]=[label];
-});
-};
+    });
+  };
   record('deck', G.deck);
   record('handHuman', G.players.human.hand);
   record('handAI', G.players.ai.hand);
